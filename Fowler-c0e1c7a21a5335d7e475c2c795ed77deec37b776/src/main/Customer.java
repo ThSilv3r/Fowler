@@ -25,13 +25,27 @@ public class Customer {
         result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
         while (enum_rentals.hasMoreElements()) {
-            Rental aRental = (Rental) enum_rentals.nextElement();
+            Rental each = (Rental) enum_rentals.nextElement();
             //show figures for this rental
-            result += "\t" + aRental.getMovie().getTitle() + "\t" + "\t" + aRental.getDaysRented() + "\t" + aRental.getCharge() + "\n";
+            result += "\t" + each.getMovie().getTitle() + "\t" + "\t" + each.getDaysRented() + "\t" + each.getCharge() + "\n";
         }
         //add footer lines
         result += "Amount owed is " + getTotalCharge() + "\n";
         result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
+        return result;
+    }
+
+    public String htmlStatement() {
+        Enumeration rentals = _rentals.elements();
+        String result = "<H1>Rentals for <EM>" + getName() + "</EM></ H1><P>\n";
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+        //show figures for each rental
+            result += each.getMovie().getTitle() + ": " + each.getCharge() + "<BR>\n";
+        }
+        //add footer lines
+        result += "<P>You owe <EM>" + getTotalCharge() + "</EM><P>\n";
+        result += "On this rental you earned <EM>" + getTotalFrequentRenterPoints() + "</EM> frequent renter points<P>";
         return result;
     }
 
@@ -56,4 +70,5 @@ public class Customer {
     }
 
 }
+
     
