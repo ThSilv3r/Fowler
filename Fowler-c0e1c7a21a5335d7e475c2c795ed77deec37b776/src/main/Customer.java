@@ -19,7 +19,7 @@ public class Customer {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
         Enumeration enum_rentals = rentals.elements();	    
-        String result = "main.Rental Record for " + this.getName() + "\n";
+        String result = "Rental Record for " + this.getName() + "\n";
         result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
         while (enum_rentals.hasMoreElements()) {
@@ -42,22 +42,22 @@ public class Customer {
         return result;
     }
 
-    private double amountFor(Rental each) {
-        double thisAmount = 0;
-        switch (each.getMovie().getPriceCode()) {
+    private double amountFor(Rental aRental) {
+        double result = 0;
+        switch (aRental.getMovie().getPriceCode()) {
             case Movie.REGULAR -> {
-                thisAmount += 2;
-                if (each.getDaysRented() > 2)
-                    thisAmount += (each.getDaysRented() - 2) * 1.5;
+                result += 2;
+                if (aRental.getDaysRented() > 2)
+                    result += (aRental.getDaysRented() - 2) * 1.5;
             }
-            case Movie.NEW_RELEASE -> thisAmount += each.getDaysRented() * 3;
+            case Movie.NEW_RELEASE -> result += aRental.getDaysRented() * 3;
             case Movie.CHILDRENS -> {
-                thisAmount += 1.5;
-                if (each.getDaysRented() > 3)
-                    thisAmount += (each.getDaysRented() - 3) * 1.5;
+                result += 1.5;
+                if (aRental.getDaysRented() > 3)
+                    result += (aRental.getDaysRented() - 3) * 1.5;
             }
         }
-        return thisAmount;
+        return result;
     }
 
 }
